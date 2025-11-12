@@ -1,0 +1,119 @@
+# PMG-AI Requirements
+# Perceptive Multimodal Generative AI Dependencies
+
+# ====================
+# Core Deep Learning Frameworks
+# ====================
+torch>=2.0.0
+torchvision>=0.15.0
+tensorflow>=2.13.0
+tensorflow-gpu>=2.13.0
+
+# ====================
+# Diffusion Models & Image Generation
+# ====================
+diffusers>=0.21.0
+transformers>=4.33.0
+accellerate>=0.23.0
+stable-diffusion-sdkit>=2.1.0
+
+# ====================
+# Computer Vision
+# ====================
+opencv-python>=4.8.0
+opencv-contrib-python>=4.8.0
+Pillow>=10.0.0
+scikit-image>=0.21.0
+imageio>=2.31.0
+albumentations>=1.3.1
+
+# ====================
+# NLP & Text Processing
+# ====================
+sentencepiece>=0.1.99
+tokenizers>=0.13.3
+ftfy>=6.1.1
+regex>=2023.8.8
+
+# ====================
+# 3D Reconstruction & Mesh Generation
+# ====================
+trimesh>=3.23.0
+pymeshlab>=2022.2
+open3d>=0.17.0
+scipy>=1.11.0
+scikit-learn>=1.3.0
+
+# ====================
+# Visualization & UI
+# ====================
+matplotlib>=3.7.2
+seaborn>=0.12.2
+plotly>=5.16.1
+tqdm>=4.66.1
+ipywidgets>=8.1.0
+
+# ====================
+# OCR & Text Extraction
+# ====================
+pytesseract>=0.3.10
+easyocr>=1.7.0
+
+# ====================
+# Image Style Transfer
+# ====================
+torchvision>=0.15.0  # For VGG19
+
+# ====================
+# Utility Libraries
+# ====================
+numpy>=1.24.3
+pandas>=2.0.3
+PyYAML>=6.0.1
+requests>=2.31.0
+h5py>=3.9.0
+
+# ====================
+# Model Hosting & APIs
+# ====================
+huggingface-hub>=0.17.0
+wandb>=0.15.10  # For experiment tracking
+
+# ====================
+# Video & Animation
+# ====================
+imageio-ffmpeg>=0.4.9
+moviepy>=1.0.3
+
+# ====================
+# Jupyter & Development
+# ====================
+jupyter>=1.0.0
+jupyterlab>=4.0.5
+ipython>=8.15.0
+
+# ====================
+# Testing & Quality
+# ====================
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.7.0
+flake8>=6.1.0
+
+# ====================
+# Optional: GPU Acceleration
+# ====================
+# xformers>=0.0.21  # For memory-efficient attention
+# ninja>=1.11.1  # For faster compilation
+
+# ====================
+# File I/O & Storage
+# ====================
+PyPDF2>=3.0.1
+python-docx>=0.8.11
+
+# ====================
+# Logging & Monitoring
+# ====================
+tensorboard>=2.14.0
+psutil>=5.9.5
