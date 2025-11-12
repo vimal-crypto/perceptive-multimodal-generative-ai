@@ -16,6 +16,7 @@ PMG-AI is a comprehensive generative AI framework that integrates **deep learnin
 - [Key Features](#key-features)
 - [System Architecture](#system-architecture)
 - [Installation](#installation)
+- - [Datasets](#datasets)
 - [Usage](#usage)
   - [PMG-1: Comic Generation & Style Transfer](#pmg-1-comic-generation--style-transfer)
   - [PMG-2: Image Generation & 3D Reconstruction](#pmg-2-image-generation--3d-reconstruction)
@@ -419,5 +420,134 @@ For questions, collaborations, or feedback:
 If you find PMG-AI useful for your research or projects, please consider giving it a star! ⭐
 
 ---
+
+
+---
+
+## 📊 Datasets
+
+PMG-AI utilizes several datasets for training and evaluation across its two main components.
+
+### PMG-1: Text and Image Generation Datasets
+
+#### LAION-400M
+- **Purpose**: Text-to-image synthesis and comic generation
+- **Size**: 400 million image-text pairs
+- **Format**: Image URLs with alt-text captions
+- **Source**: Large-scale web-crawled dataset
+- **Usage**: Training Stable Diffusion models for comic panel generation
+- **License**: Creative Commons (varies by image)
+- **Access**: [LAION-400M Official](https://laion.ai/blog/laion-400-open-dataset/)
+
+#### Custom Comic Dataset
+- **Purpose**: Comic generation and style transfer
+- **Size**: 10,000+ comic panels
+- **Format**: JPG/PNG images with dialogue annotations
+- **Features**: Character bounding boxes, speech bubble locations, text content
+- **Usage**: Fine-tuning models for comic-specific generation
+
+#### Persona Dataset
+- **Purpose**: Character-driven dialogue generation
+- **Size**: 5,000+ character profiles
+- **Format**: JSON files with character attributes
+- **Features**: Personality traits, speech patterns, visual descriptions
+- **Usage**: PersonaGPT dialogue generation
+
+### PMG-2: 3D Reconstruction Datasets
+
+#### Pix3D Dataset
+- **Purpose**: 2D-to-3D reconstruction training
+- **Size**: 10,069 image-3D pairs
+- **Categories**: Furniture, household objects
+- **Format**: 
+  - Images: 256x256 RGB
+  - 3D models: OBJ format with textures
+  - Annotations: Camera parameters, object masks
+- **Source**: [Pix3D Official](http://pix3d.csail.mit.edu/)
+- **Usage**: Training depth estimation and 3D reconstruction models
+- **License**: MIT License
+
+#### ShapeNet Core
+- **Purpose**: 3D shape understanding and reconstruction
+- **Size**: 51,300+ unique 3D models
+- **Categories**: 55 common object categories
+- **Format**: OBJ, PLY mesh files
+- **Source**: [ShapeNet Official](https://shapenet.org/)
+- **Usage**: Pre-training NeRF and mesh reconstruction models
+- **License**: ShapeNet Terms of Use
+
+#### Custom Depth Dataset
+- **Purpose**: Depth estimation fine-tuning
+- **Size**: 2,000+ indoor/outdoor scenes
+- **Format**: 
+  - RGB images: 512x512
+  - Depth maps: 16-bit PNG
+  - Point clouds: PLY format
+- **Source**: Captured using Intel RealSense D435
+- **Usage**: Fine-tuning MiDaS depth estimation
+
+### Data Organization
+
+Datasets should be organized in the following structure:
+
+```
+data/
+├── pmg1/
+│   ├── comics/
+│   │   ├── images/
+│   │   └── annotations/
+│   ├── personas/
+│   └── laion_subset/
+└── pmg2/
+    ├── pix3d/
+    │   ├── img/
+    │   ├── mask/
+    │   └── model/
+    ├── shapenet/
+    └── depth_custom/
+        ├── rgb/
+        ├── depth/
+        └── pointclouds/
+```
+
+### Downloading Datasets
+
+**LAION-400M** (subset):
+```bash
+wget https://the-eye.eu/public/AI/cah/laion400m-met-release/laion400m-meta/
+```
+
+**Pix3D**:
+```bash
+wget http://pix3d.csail.mit.edu/data/pix3d.zip
+unzip pix3d.zip -d data/pmg2/
+```
+
+**ShapeNet**:
+1. Register at https://shapenet.org/
+2. Download ShapeNetCore.v2
+3. Extract to `data/pmg2/shapenet/`
+
+### Dataset Statistics
+
+| Dataset | Size | Type | Resolution | Format |
+|---------|------|------|------------|--------|
+| LAION-400M | 400M pairs | Text-Image | Varies | JPG/PNG |
+| Comic Custom | 10K panels | Image + Text | 512x512 | PNG |
+| Pix3D | 10K pairs | RGB + 3D | 256x256 | JPG + OBJ |
+| ShapeNet | 51K models | 3D Mesh | N/A | OBJ/PLY |
+| Depth Custom | 2K scenes | RGB + Depth | 512x512 | PNG + PLY |
+
+### Data Preprocessing
+
+All datasets undergo preprocessing before training:
+
+1. **Image Normalization**: Mean=[0.485, 0.456, 0.406], Std=[0.229, 0.224, 0.225]
+2. **Resizing**: Images resized to 512x512 for PMG-1, 256x256 for PMG-2
+3. **Augmentation**: Random flips, rotations, color jittering
+4. **Depth Map Normalization**: Min-max scaling to [0, 1] range
+
+For detailed preprocessing scripts, see `src/data_processing/`.
+
 
 **Made with ❤️ by the PMG-AI Team @ Amrita School of Computing**
